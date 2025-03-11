@@ -7,8 +7,20 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome to ROBINCRAFT</h1>
-    <canvas id="gameCanvas"></canvas>
-    <script src="script.js"></script>
+    <h1>ROBINCRAFT</h1>
+    <button id="playBtn">Play New World</button>
+
+    <audio id="bg-music" autoplay loop>
+        <source src="assets/sounds/Lets Go.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        document.getElementById("playBtn").addEventListener("click", () => {
+            window.location.href = "game.html";
+        });
+
+        let music = document.getElementById("bg-music");
+        music.volume = 0.2; // Low volume
+    </script>
 </body>
 </html>
