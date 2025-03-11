@@ -1,35 +1,33 @@
 body {
-    background-color: black;
     text-align: center;
+    background: url('assets/textures/skybox.jpg') no-repeat center center fixed;
+    background-size: cover;
     color: white;
     font-family: Arial, sans-serif;
     margin: 0;
+    padding: 0;
 }
 
 h1 {
-    font-size: 3rem;
-    text-shadow: 3px 3px 8px black;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 5px black;
 }
 
-#playBtn {
-    font-size: 24px;
-    padding: 15px 30px;
+button {
+    font-size: 20px;
+    padding: 12px 20px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
     background: green;
     color: white;
-    border-radius: 8px;
-    cursor: pointer;
 }
 
-#playBtn:hover {
+button:hover {
     background: darkgreen;
-}
-
-canvas {
-    display: block;
-    width: 100vw;
-    height: 100vh;
-    background-color: skyblue;
-    image-rendering: pixelated;
 }
 
 /* Mobile Controls */
@@ -38,17 +36,10 @@ canvas {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
 }
 
 #mobile-controls button {
+    display: inline-block;
     font-size: 24px;
-    padding: 15px;
-    border-radius: 10px;
-    background: gray;
-    color: white;
-    border: none;
-    cursor: pointer;
+    margin: 5px;
 }
