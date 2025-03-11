@@ -5,22 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ROBINCRAFT</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
     <h1>ROBINCRAFT</h1>
-    <button id="playBtn">Play New World</button>
+    <button id="playBtn">Play New World ▶️</button>
+
+    <div id="mobile-controls">
+        <button onclick="move('up')">🔼</button>
+        <button onclick="move('left')">◀️</button>
+        <button onclick="move('right')">▶️</button>
+        <button onclick="move('down')">🔽</button>
+        <button onclick="jump()">⏫</button>
+    </div>
 
     <audio id="bg-music" autoplay loop>
-        <source src="assets/sounds/Lets Go.mp3" type="audio/mpeg">
+        <source src="assets/Lets Go.mp3" type="audio/mpeg">
     </audio>
 
-    <script>
-        document.getElementById("playBtn").addEventListener("click", () => {
-            window.location.href = "game.html";
-        });
-
-        let music = document.getElementById("bg-music");
-        music.volume = 0.2; // Low volume
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
