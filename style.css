@@ -2,27 +2,23 @@ body {
     margin: 0;
     overflow: hidden;
     text-align: center;
-    background-color: black;
-    color: white;
+    background-color: #87CEEB;
 }
 
 h1 {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 24px;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
 }
 
-#mobile-controls {
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-    text-align: center;
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: green;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 
-#mobile-controls button {
-    font-size: 30px;
-    margin: 5px;
-    padding: 10px;
+button:hover {
+    background-color: darkgreen;
 }
