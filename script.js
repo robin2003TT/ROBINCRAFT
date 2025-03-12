@@ -1,86 +1,95 @@
 let scene, camera, renderer, player;
-let keys = { w: false, a: false, s: false, d: false };
-let moveSpeed = 0.1;
+let moveForward = false, moveBackward = false, moveLeft = false, moveRight = false, isJumping = false;
 
 function init() {
+    // Scene
     scene = new THREE.Scene();
+
+    // Camera
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    renderer = new THREE.WebGLRenderer();
+    camera.position.set(0, 2, 5);
+
+    // Renderer
+    renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("gameCanvas") });
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
-    // Ground (Grass Texture)
-    let textureLoader = new THREE.TextureLoader();
-    let groundTexture = textureLoader.load('assets/textures/grass.png');
-    let groundMaterial = new THREE.MeshBasicMaterial({ map: groundTexture });
+    // Light
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(5, 10, 5);
+    scene.add(light);
 
-    let groundGeometry = new THREE.PlaneGeometry(100, 100);
-    let ground = new THREE.Mesh(groundGeometry, groundMaterial);
-    ground.rotation.x = -Math.PI / 2;
-    scene.add(ground);
-
-    // Player (Cube)
-    let playerGeometry = new THREE.BoxGeometry(1, 2, 1);
-    let playerMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+    // Player (a cube)
+    const playerGeometry = new THREE.BoxGeometry(1, 2, 1);
+    const playerMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
     player = new THREE.Mesh(playerGeometry, playerMaterial);
     player.position.y = 1;
     scene.add(player);
 
-    camera.position.set(0, 5, 10);
+    // Floor
+    const floorTexture = new THREE.TextureLoader().load("assets/textures/grass_top.png");
+    const floorMaterial = new THREE.MeshStandardMaterial({ map: floorTexture });
+    const floor = new THREE.Mesh(new THREE.PlaneGeometry(50, 50), floorMaterial);
+    floor.rotation.x = -Math.PI / 2;
+    scene.add(floor);
 
-    // Mouse Look Controls
-    document.addEventListener('mousemove', (event) => {
-        let x = event.movementX * 0.002;
-        let y = event.movementY * 0.002;
-        camera.rotation.y -= x;
-        camera.rotation.x -= y;
-    });
+    // Load background music
+    document.getElementById("bg-music").play();
 
     animate();
 }
 
-// Keyboard Controls
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'w') keys.w = true;
-    if (e.key === 'a') keys.a = true;
-    if (e.key === 's') keys.s = true;
-    if (e.key === 'd') keys.d = true;
+// Movement controls
+document.addEventListener("keydown", (event) => {
+    if (event.key === "w") moveForward = true;
+    if (event.key === "s") moveBackward = true;
+    if (event.key === "a") moveLeft = true;
+    if (event.key === "d") moveRight = true;
+    if (event.key === " " && !isJumping) {
+        isJumping = true;
+        player.position.y += 1;
+        setTimeout(() => (isJumping = false), 500);
+    }
 });
-document.addEventListener('keyup', (e) => {
-    if (e.key === 'w') keys.w = false;
-    if (e.key === 'a') keys.a = false;
-    if (e.key === 's') keys.s = false;
-    if (e.key === 'd') keys.d = false;
+
+document.addEventListener("keyup", (event) => {
+    if (event.key === "w") moveForward = false;
+    if (event.key === "s") moveBackward = false;
+    if (event.key === "a") moveLeft = false;
+    if (event.key === "d") moveRight = false;
 });
 
 // Mobile Controls
-function move(direction) {
-    if (direction === 'up') player.position.z -= moveSpeed;
-    if (direction === 'down') player.position.z += moveSpeed;
-    if (direction === 'left') player.position.x -= moveSpeed;
-    if (direction === 'right') player.position.x += moveSpeed;
-}
+document.getElementById("move-forward").addEventListener("touchstart", () => (moveForward = true));
+document.getElementById("move-forward").addEventListener("touchend", () => (moveForward = false));
 
-function jump() {
-    player.position.y += 1;
-    setTimeout(() => player.position.y -= 1, 300);
-}
+document.getElementById("move-back").addEventListener("touchstart", () => (moveBackward = true));
+document.getElementById("move-back").addEventListener("touchend", () => (moveBackward = false));
 
-// Game Loop
+document.getElementById("move-left").addEventListener("touchstart", () => (moveLeft = true));
+document.getElementById("move-left").addEventListener("touchend", () => (moveLeft = false));
+
+document.getElementById("move-right").addEventListener("touchstart", () => (moveRight = true));
+document.getElementById("move-right").addEventListener("touchend", () => (moveRight = false));
+
+document.getElementById("jump").addEventListener("touchstart", () => {
+    if (!isJumping) {
+        isJumping = true;
+        player.position.y += 1;
+        setTimeout(() => (isJumping = false), 500);
+    }
+});
+
 function animate() {
     requestAnimationFrame(animate);
 
-    if (keys.w) player.position.z -= moveSpeed;
-    if (keys.a) player.position.x -= moveSpeed;
-    if (keys.s) player.position.z += moveSpeed;
-    if (keys.d) player.position.x += moveSpeed;
+    if (moveForward) player.position.z -= 0.1;
+    if (moveBackward) player.position.z += 0.1;
+    if (moveLeft) player.position.x -= 0.1;
+    if (moveRight) player.position.x += 0.1;
 
-    camera.lookAt(player.position);
     renderer.render(scene, camera);
 }
 
-// Background Music
-let music = document.getElementById('bg-music');
-music.volume = 0.2;
-
 init();
+    
