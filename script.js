@@ -23,8 +23,8 @@ function init() {
 
     // Load Textures
     const loader = new THREE.TextureLoader();
-    const dirtTexture = loader.load("dirt_texture.png");
-    const grassTexture = loader.load("grass_texture.png");
+    const dirtTexture = loader.load("dirt.png");
+    const grassTexture = loader.load("grass_top.png");
 
     // Create Ground
     for (let x = -5; x < 5; x++) {
