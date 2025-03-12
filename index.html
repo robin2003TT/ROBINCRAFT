@@ -7,19 +7,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome to ROBINCRAFT</h1>
-    <button onclick="startGame()">🎮 Play New World</button>
+    <h1>ROBINCRAFT</h1>
+    <canvas id="gameCanvas"></canvas>
+    
+    <div id="mobile-controls">
+        <button id="move-left">◀️</button>
+        <button id="move-forward">🔼</button>
+        <button id="move-right">▶️</button>
+        <button id="move-back">🔽</button>
+        <button id="jump">⏫</button>
+        <button id="sit">⏏️</button>
+    </div>
 
     <audio id="bg-music" loop>
-        <source src="assets/Lets Go.mp3" type="audio/mpeg">
+        <source src="assets/music/LetsGo.mp3" type="audio/mpeg">
     </audio>
 
-    <script>
-        function startGame() {
-            window.location.href = "game.html";
-        }
-        document.getElementById("bg-music").volume = 0.2;
-        document.getElementById("bg-music").play();
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
