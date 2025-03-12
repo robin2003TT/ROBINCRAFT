@@ -1,25 +1,28 @@
 body {
+    margin: 0;
+    overflow: hidden;
     text-align: center;
     background-color: black;
     color: white;
 }
 
-canvas {
-    display: block;
-    margin: auto;
-    background: url('assets/textures/skybox.jpg');
+h1 {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
 }
 
-#controls {
-    position: fixed;
+#mobile-controls {
+    position: absolute;
     bottom: 20px;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+    text-align: center;
 }
 
-button {
-    font-size: 20px;
+#mobile-controls button {
+    font-size: 30px;
+    margin: 5px;
     padding: 10px;
 }
